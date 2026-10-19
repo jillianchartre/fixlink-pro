@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FixLink Pro | Maintenance Workforce</title>
+<style>
+:root {
+  --navy: #14213d;
+  --blue: #3867f6;
+  --blue-light: #eaf0ff;
+  --background: #f5f7fb;
+  --white: #ffffff;
+  --text: #18243a;
+  --muted: #758096;
+  --border: #e7ebf2;
+  --green: #16835b;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Arial, sans-serif;
+}
+button, input, select, textarea {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+.app {
+  max-width: 1100px;
+  margin: auto;
+  min-height: 100vh;
+}
+.topbar {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  color: white;
+  font-size: 20px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #3867f6, #173bb8);
+  box-shadow: 0 5px 14px #3867f633;
+}
+.brand-name {
+  font-weight: 850;
+  font-size: 21px;
+  letter-spacing: -0.7px;
+}
+.brand-name span {
+  color: var(--blue);
+}
+.brand-caption {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 3px;
+}
+.role-select {
+  max-width: 180px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: white;
+  color: var(--text);
+}
+main {
+  padding: 24px 16px 100px;
+}
+.eyebrow {
+  color: var(--blue);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1.4px;
+  font-weight: 800;
+}
+.hero {
+  background: linear-gradient(120deg, #14213d, #203f79);
+  color: white;
+  border-radius: 22px;
+  padding: 26px 21px;
+  overflow: hidden;
+  position: relative;
+}
+.hero h1 {
+  font-size: clamp(27px, 6vw, 40px);
+  line-height: 1.1;
+  letter-spacing: -1.2px;
+  margin: 12px 0;
+  max-width: 450px;
+}
+.hero p {
+  color: #d2def6;
+  line-height: 1.6;
+  font-size: 14px;
+  max-width: 430px;
+}
+.hero-badge {
+  display: inline-block;
+  padding: 8px 11px;
+  border-radius: 30px;
+  background: #ffffff17;
+  border: 1px solid #ffffff25;
+  font-size: 11px;
+  color: #edf3ff;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 18px 0 25px;
+}
+.stat {
+  padding: 17px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+.stat-label {
+  color: var(--muted);
+  font-size: 12px;
+}
+.stat-value {
+  font-size: 25px;
+  font-weight: 850;
+  letter-spacing: -0.7px;
+  margin-top: 9px;
+}
+.stat-note {
+  font-size: 11px;
+  color: var(--green);
+  margin-top: 5px;
+}
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 25px 0 14px;
+}
+.section-heading h2 {
+  font-size: 20px;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+.muted {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 6px;
+}
+.primary, .secondary {
+  padding: 12px 15px;
+  border-radius: 11px;
+  border: 0;
+  font-weight: 750;
+}
+.primary {
+  background: var(--blue);
+  color: white;
+  box-shadow: 0 4px 10px #3867f625;
+}
+.secondary {
+  color: var(--navy);
+  background: var(--blue-light);
+}
+.primary:active, .secondary:active {
+  transform: scale(0.98);
+}
+.search-box {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 17px;
+}
+input, select, textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  background: white;
+  color: var(--text);
+}
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid #3867f655;
+  border-color: var(--blue);
+}
+.shifts {
+  display: grid;
+  gap: 13px;
+}
+.shift {
+  padding: 18px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  transition: box-shadow 0.2s;
+}
+.shift:hover {
+  box-shadow: 0 7px 22px #14213d0b;
+}
+.shift-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: flex-start;
+}
+.shift h3 {
+  margin: 10px 0 6px;
+  font-size: 17px;
+  letter-spacing: -0.3px;
+}
+.company {
+  font-size: 12px;
+  color: var(--muted);
+}
+.tag {
+  display: inline-block;
+  background: #edf3ff;
+  color: #3158c8;
+  border-radius: 7px;
+  padding: 6px 8px;
+  font-size: 10px;
+  font-weight: 800;
+}
+.urgent {
+  background: #fff0e8;
+  color: #bc531e;
+}
+.shift-pay {
+  font-size: 23px;
+  font-weight: 850;
+  white-space: nowrap;
+  letter-spacing: -0.6px;
+}
+.shift-pay small {
+  display: block;
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 500;
+  text-align: right;
+  letter-spacing: 0;
+  margin-top: 4px;
+}
+.shift-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px 15px;
+  color: var(--muted);
+  font-size: 12px;
+  margin: 16px 0;
+}
+.shift-footer {
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.shift-footer span {
+  color: var(--muted);
+  font-size: 11px;
+}
+.form-panel {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  padding: 19px;
+  margin: 20px 0;
+}
+.form-panel h2 {
+  margin-top: 0;
+}
+.form-grid {
+  display: grid;
+  gap: 12px;
+}
+.form-grid label {
+  font-size: 12px;
+  font-weight: 700;
+  display: grid;
+  gap: 7px;
+}
+.hidden {
+  display: none !important;
+}
+.empty {
+  background: white;
+  border: 1px dashed #cbd4e3;
+  border-radius: 16px;
+  text-align: center;
+  padding: 30px 18px;
+  color: var(--muted);
+}
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  background: #ffffffef;
+  backdrop-filter: blur(15px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 5px calc(12px + env(safe-area-inset-bottom));
+}
+.bottom-nav button {
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 5px 10px;
+}
+.bottom-nav button span {
+  display: block;
+  font-size: 19px;
+  margin-bottom: 4px;
+}
+.bottom-nav button.active {
+  color: var(--blue);
+}
+.notice {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.6;
+  text-align: center;
+  margin-top: 25px;
+}
+@media (min-width: 650px) {
+  main {
+    padding: 32px 28px 70px;
+  }
+  .hero {
+    padding: 38px;
+  }
+  .stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .search-box {
+    grid-template-columns: 1fr 200px;
+  }
+  .shifts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .form-grid .full {
+    grid-column: 1 / -1;
+  }
+  .bottom-nav {
+    display: none;
+  }
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-icon">F</div>
+    <div>
+      <div class="brand-name">Fix<span>Link</span> Pro</div>
+      <div class="brand-caption">PROPERTY WORKFORCE</div>
+    </div>
+  </div>
+  <select class="role-select" id="role" aria-label="User role">
+    <option value="contractor">Contractor</option>
+    <option value="manager">Property manager</option>
+  </select>
+</header>
+<main>
+  <section class="hero">
+    <span class="hero-badge">✦ YOUR WORK. YOUR SCHEDULE.</span>
+    <h1 id="heroTitle">Your next job starts here.</h1>
+    <p id="heroText">
+      Discover maintenance shifts, choose the work that fits your schedule,
+      and keep your upcoming jobs organized.
+    </p>
+  </section>
+  <section class="stats">
+    <article class="stat">
+      <div class="stat-label" id="stat1Label">Available shifts</div>
+      <div class="stat-value" id="stat1">04</div>
+      <div class="stat-note">Demo listings</div>
+    </article>
+    <article class="stat">
+      <div class="stat-label">Average listed pay</div>
+      <div class="stat-value" id="stat2">$185</div>
+      <div class="stat-note">Illustrative amounts</div>
+    </article>
+    <article class="stat">
+      <div class="stat-label">Job categories</div>
+      <div class="stat-value">06</div>
+      <div class="muted">Maintenance skills</div>
+    </article>
+    <article class="stat">
+      <div class="stat-label">Your assignments</div>
+      <div class="stat-value" id="stat4">00</div>
+      <div class="muted">In this browser demo</div>
+    </article>
+  </section>
+  <div class="section-heading">
+    <div>
+      <h2 id="listTitle">Available shifts</h2>
+      <div class="muted" id="listSubtitle">
+        Find work that fits your schedule.
+      </div>
+    </div>
+    <button id="postButton" class="primary">+ Post shift</button>
+  </div>
+  <section id="postPanel" class="form-panel hidden">
+    <h2>Post a new shift</h2>
+    <form id="shiftForm" class="form-grid">
+      <label class="full">
+        Shift title
+        <input id="title" required
+          placeholder="e.g. Apartment maintenance technician">
+      </label>
+      <label>
+        Property / company
+        <input id="company" required
+          placeholder="e.g. Example Property Group">
+      </label>
+      <label>
+        Location
+        <input id="location" required
+          placeholder="e.g. Denver, CO">
+      </label>
+      <label>
+        Job category
+        <select id="category" required>
+          <option value="General Maintenance">General Maintenance</option>
+          <option value="Plumbing">Plumbing</option>
+          <option value="Electrical">Electrical</option>
+          <option value="HVAC">HVAC</option>
+          <option value="Cleaning">Cleaning</option>
+          <option value="Landscaping">Landscaping</option>
+        </select>
+      </label>
+      <label>
+        Pay for the shift ($)
+        <input id="pay" type="number" min="1" required
+          placeholder="200">
+      </label>
+      <label>
+        Date
+        <input id="date" type="date" required>
+      </label>
+      <label>
+        Hours
+        <input id="hours" type="number" min="1" max="24"
+          value="8" required>
+      </label>
+      <label class="full">
+        Description
+        <textarea id="description" rows="3" required
+          placeholder="Describe the work and qualifications needed"></textarea>
+      </label>
+      <button type="submit" class="primary full">Publish demo shift</button>
+      <button type="button" id="cancelButton"
+        class="secondary full">Cancel</button>
+    </form>
+  </section>
+  <section class="search-box">
+    <input id="search" placeholder="⌕ Search jobs or locations..."
+      aria-label="Search shifts">
+    <select id="categoryFilter" aria-label="Filter by category">
+      <option value="">All categories</option>
+      <option>General Maintenance</option>
+      <option>Plumbing</option>
+      <option>Electrical</option>
+      <option>HVAC</option>
+      <option>Cleaning</option>
+      <option>Landscaping</option>
+    </select>
+  </section>
+  <section id="shifts" class="shifts"></section>
+  <p class="notice">
+    FIXLINK PRO · WORKFORCE MARKETPLACE PROTOTYPE<br>
+    Demo data only. No real jobs, accounts, or payments are connected.
+  </p>
+</main>
+<nav class="bottom-nav" aria-label="Main navigation">
+  <button class="active" data-action="home">
+    <span>⌂</span>Home
+  </button>
+  <button data-action="search">
+    <span>⌕</span>Explore
+  </button>
+  <button data-action="post">
+    <span>＋</span>Post
+  </button>
+  <button data-action="profile">
+    <span>◉</span>Profile
+  </button>
+</nav>
+</div>
+<script>
+const sampleShifts = [
+  {
+    id: 1,
+    title: "Apartment Maintenance Technician",
+    company: "Pinecrest Property Group",
+    location: "Littleton, CO",
+    category: "General Maintenance",
+    pay: 200,
+    hours: 8,
+    date: "2026-10-22",
+    description: "Complete routine repairs and inspect vacant units.",
+    status: "open",
+    urgent: false
+  },
+  {
+    id: 2,
+    title: "Emergency Plumbing Repair",
+    company: "Summit Residential",
+    location: "Denver, CO",
+    category: "Plumbing",
+    pay: 240,
+    hours: 6,
+    date: "2026-10-21",
+    description: "Diagnose a plumbing issue and complete an approved repair.",
+    status: "open",
+    urgent: true
+  },
+  {
+    id: 3,
+    title: "Vacant Unit Cleaning",
+    company: "Aspen Living",
+    location: "Lakewood, CO",
+    category: "Cleaning",
+    pay: 140,
+    hours: 5,
+    date: "2026-10-23",
+    description: "Prepare an apartment for the next tenant.",
+    status: "open",
+    urgent: false
+  },
+  {
+    id: 4,
+    title: "HVAC Preventive Inspection",
+    company: "Westside Communities",
+    location: "Denver, CO",
+    category: "HVAC",
+    pay: 160,
+    hours: 4,
+    date: "2026-10-24",
+    description: "Inspect equipment and document maintenance findings.",
+    status: "open",
+    urgent: false
+  }
+];
+let shifts = [...sampleShifts];
+try {
+  const saved = localStorage.getItem("fixlink-pro-shifts");
+  if (saved) shifts = JSON.parse(saved);
+} catch (error) {
+  console.log("Demo shifts could not be loaded.");
+}
+let claimed = [];
+try {
+  claimed = JSON.parse(
+    localStorage.getItem("fixlink-pro-claimed") || "[]"
+  );
+} catch (error) {
+  claimed = [];
+}
+const $ = id => document.getElementById(id);
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+function save() {
+  try {
+    localStorage.setItem("fixlink-pro-shifts", JSON.stringify(shifts));
+    localStorage.setItem("fixlink-pro-claimed", JSON.stringify(claimed));
+  } catch (error) {
+    alert("Browser storage is unavailable.");
+  }
+}
+function render() {
+  const query = $("search").value.toLowerCase().trim();
+  const category = $("categoryFilter").value;
+  const manager = $("role").value === "manager";
+  const filtered = shifts.filter(shift => {
+    const matchesText =
+      `${shift.title} ${shift.company} ${shift.location} ${shift.category}`
+      .toLowerCase().includes(query);
+    const matchesCategory = !category || shift.category === category;
+    const matchesStatus = manager || shift.status === "open";
+    return matchesText && matchesCategory && matchesStatus;
+  });
+  $("stat1").textContent = String(
+    shifts.filter(shift => shift.status === "open").length
+  ).padStart(2, "0");
+  $("stat4").textContent = String(claimed.length).padStart(2, "0");
+  $("stat2").textContent = shifts.length
+    ? "$" + Math.round(
+        shifts.reduce((total, shift) => total + shift.pay, 0) / shifts.length
+      )
+    : "$0";
+  if (!filtered.length) {
+    $("shifts").innerHTML =
+      '<div class="empty">No matching shifts found. Try another search.</div>';
+    return;
+  }
+  $("shifts").innerHTML = filtered.map(shift => {
+    const isClaimed = shift.status === "claimed";
+    let buttonText = "Claim shift";
+    if (manager) buttonText = isClaimed ? "View assignment" : "Open listing";
+    else if (isClaimed) buttonText = "Claimed in demo";
+    return `
+      <article class="shift">
+        <div class="shift-top">
+          <div>
+            <span class="tag ${shift.urgent ? "urgent" : ""}">
+              ${shift.urgent ? "URGENT" : escapeHTML(shift.category)}
+            </span>
+            <h3>${escapeHTML(shift.title)}</h3>
+            <div class="company">${escapeHTML(shift.company)}</div>
+          </div>
+          <div class="shift-pay">
+            $${Number(shift.pay).toFixed(0)}
+            <small>per shift</small>
+          </div>
+        </div>
+        <div class="shift-details">
+          <span>📍 ${escapeHTML(shift.location)}</span>
+          <span>◷ ${Number(shift.hours)} hours</span>
+          <span>▦ ${escapeHTML(shift.date || "Date TBD")}</span>
+        </div>
+        <p class="muted">${escapeHTML(shift.description)}</p>
+        <div class="shift-footer">
+          <span>${isClaimed ? "Demo status: claimed" : "Demo listing"}</span>
+          <button class="${isClaimed ? "secondary" : "primary"}"
+            onclick="handleShift(${shift.id})">
+            ${buttonText}
+          </button>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+window.handleShift = function(id) {
+  const shift = shifts.find(item => item.id === id);
+  if (!shift) return;
+  if ($("role").value === "manager") {
+    alert("Demo status: " + shift.status);
+    return;
+  }
+  if (shift.status !== "open") {
+    alert("This demo shift has already been claimed.");
+    return;
+  }
+  if (!confirm("Claim this demo shift?")) return;
+  shift.status = "claimed";
+  claimed.push(id);
+  save();
+  render();
+  alert(
+    "Demo shift claimed. A production app would confirm the assignment."
+  );
+};
+$("role").addEventListener("change", () => {
+  const manager = $("role").value === "manager";
+  $("heroTitle").textContent = manager
+    ? "Build your maintenance team."
+    : "Your next job starts here.";
+  $("heroText").textContent = manager
+    ? "Post maintenance shifts and connect with available contractors."
+    : "Discover maintenance shifts and choose work that fits your schedule.";
+  $("listTitle").textContent = manager
+    ? "Your shift marketplace"
+    : "Available shifts";
+  $("listSubtitle").textContent = manager
+    ? "Manage your demo listings."
+    : "Find work that fits your schedule.";
+  $("postButton").textContent = manager
+    ? "+ Post shift"
+    : "Switch to manager to post";
+  render();
+});
+$("postButton").addEventListener("click", () => {
+  if ($("role").value !== "manager") {
+    alert("Switch to Property manager to post a demo shift.");
+    return;
+  }
+  $("postPanel").classList.toggle("hidden");
+  $("postPanel").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+$("cancelButton").addEventListener("click", () => {
+  $("postPanel").classList.add("hidden");
+});
+$("shiftForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const pay = Number($("pay").value);
+  const hours = Number($("hours").value);
+  if (!Number.isFinite(pay) || pay <= 0 ||
+      !Number.isFinite(hours) || hours < 1 || hours > 24) {
+    alert("Enter a valid pay amount and shift length.");
+    return;
+  }
+  shifts.unshift({
+    id: Date.now(),
+    title: $("title").value.trim(),
+    company: $("company").value.trim(),
+    location: $("location").value.trim(),
+    category: $("category").value,
+    pay,
+    hours,
+    date: $("date").value,
+    description: $("description").value.trim(),
+    status: "open",
+    urgent: false
+  });
+  save();
+  event.target.reset();
+  $("postPanel").classList.add("hidden");
+  $("search").value = "";
+  $("categoryFilter").value = "";
+  render();
+  alert("Demo shift published in this browser!");
+});
+$("search").addEventListener("input", render);
+$("categoryFilter").addEventListener("change", render);
+document.querySelectorAll(".bottom-nav button").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".bottom-nav button")
+      .forEach(item => item.classList.remove("active"));
+    button.classList.add("active");
+    const action = button.dataset.action;
+    if (action === "post") {
+      $("postButton").click();
+    } else if (action === "search") {
+      $("search").focus();
+      window.scrollTo({ top: 350, behavior: "smooth" });
+    } else if (action === "profile") {
+      alert(
+        "Contractor profiles will be added in the next development stage."
+      );
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+});
+render();
+</script>
+</body>
+</html>
